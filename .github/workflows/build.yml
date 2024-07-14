@@ -1,0 +1,52 @@
+name: Build Alist
+
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Build Alist
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build Alist
+      uses: vmactions/freebsd-vm@v1
+      with:
+        usesh: true
+        release: 13.2
+        prepare: |
+          pkg install -y node wget curl git go121 gcc bash gawk gsed
+          ln -s /usr/local/bin/go121 /usr/local/bin/go
+        run: |
+          export LATEST_APP=$(wget -qO- https://api.github.com/repos/alist-org/alist/tags | gawk -F '["v]' '/name/{print "v"$5;exit}')
+          git clone -b $LATEST_APP https://github.com/alist-org/alist
+          cd alist/public && wget https://github.com/alist-org/alist-web/releases/latest/download/dist.tar.gz && tar xzf dist.tar.gz && rm dist.tar.gz
+          cd ..
+          bash ../build.sh
+          
+    - name: Upload artifact
+      uses: actions/upload-artifact@main
+      with:
+        name: am-alist-freebsd
+        path: |
+            alist/alist
+
+    - name: Generate release tag
+      id: tag
+      run: echo "release_tag=$(wget -qO- https://api.github.com/repos/alist-org/alist/tags | gawk -F '["v]' '/name/{print "v"$5;exit}')" >> $GITHUB_OUTPUT
+
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.tag.outputs.release_tag }}
+        files: |
+              alist/alist
+              
+    - name: Delete workflow runs
+      uses: Mattraks/delete-workflow-runs@v2
+      with:
+        token: ${{ github.token }}
+        repository: ${{ github.repository }}
+        retain_days: 1
+        keep_minimum_runs: 8
