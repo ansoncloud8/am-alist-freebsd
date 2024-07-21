@@ -23,7 +23,7 @@ jobs:
           github-token: ${{ secrets.PAT_TOKEN }}
           script: |
               await github.rest.actions.createWorkflowDispatch({
-              owner: 'applexad',
+              owner: 'ansoncloud8',
               repo: 'am-alist-freebsd',
               workflow_id: 'build.yml',
               ref: 'main'
