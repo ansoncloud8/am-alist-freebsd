@@ -1,5 +1,6 @@
 # am-alist-freebsd
-am-alist-freebsd
+https://github.com/ansoncloud8/am-alist-freebsd
+
 根据官网alist源码自动构建alist（FreeBSD版本）可以部署文件,实现serv00部署.
 
 - 快速部署视频教程：[详细教程](https://youtu.be/h6fc_DKArrU)
