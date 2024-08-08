@@ -43,6 +43,11 @@ screen ./alist server
 8、成功访问alist
 你绑定的域名
 
+- alist保活命令（注册这个命令修改下 alsit的文件夹目录，是你安装的目录）
+```
+(crontab -l; echo "cd ~/domains/alsit的文件夹目录 && screen ./alist server") | crontab -
+```
+
  #
 ▶️ **新人[YouTube](https://youtube.com/@AM_CLUB)** 需要您的支持，请务必帮我**点赞**、**关注**、**打开小铃铛**，***十分感谢！！！*** ✅
 </br>🎁 不要只是下载或Fork。请 **follow** 我的GitHub、给我所有项目一个 **Star** 星星（拜托了）！你的支持是我不断前进的动力！ 💖
