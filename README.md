@@ -34,6 +34,12 @@ chmod +x alist
 ~~~
 screen ./alist server
 ~~~
+将会话转为后台运行：
+
+运行 screen ./alist server 后，可以使用快捷键将 screen 会话放入后台运行。按下以下组合键：
+~~~
+Ctrl + A 然后按 D
+~~~
 
 重置密码
 ~~~
