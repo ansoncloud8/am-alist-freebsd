@@ -15,7 +15,11 @@
 
 部署alist
 下载项目：https://github.com/ansoncloud8/am-alist-freebsd
-服务器命令下载：
+最新版本命令下载：
+~~~
+curl -O -L https://github.com/ansoncloud8/am-alist-freebsd/releases/latest/download/alist
+~~~
+指标版本命令下载(v3.34.0换成想要的版本就可以):
 ~~~
 curl -O -L https://github.com/ansoncloud8/am-alist-freebsd/releases/download/v3.34.0/alist
 ~~~
